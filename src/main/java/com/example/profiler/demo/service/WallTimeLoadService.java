@@ -1,9 +1,9 @@
 package com.example.profiler.demo.service;
 
-import org.springframework.stereotype.Service;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.CountDownLatch;
+import org.springframework.stereotype.Service;
 
 @Service
 public class WallTimeLoadService {
@@ -34,22 +34,23 @@ public class WallTimeLoadService {
     long[] checksum = new long[1];
 
     for (int i = 0; i < threads; i++) {
-      executor.submit(() -> {
-        try {
-          synchronized (lock) {
-            sleep(50);
-            checksum[0] += System.nanoTime();
-          }
-        } finally {
-          latch.countDown();
-        }
-      });
+      executor.submit(
+          () -> {
+            try {
+              synchronized (lock) {
+                sleep(50);
+                checksum[0] += System.nanoTime();
+              }
+            } finally {
+              latch.countDown();
+            }
+          });
     }
 
     try {
       latch.await();
     } catch (InterruptedException e) {
-      Thread.currentThread()interrupt();
+      Thread.currentThread().interrupt();
     } finally {
       executor.shutdown();
     }

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +44,7 @@ public class ProfileLoadController {
     return Map.of(
         "service", "cloud-profiler-java-demo",
         "docs", "/swagger-ui.html",
-        "endpoints", List.of("/api/cpu", "/api/heap", "/api/mixed", "/api/wall-time"));
+        "endpoints", List.of("/api/cpu", "/api/heap", "/api/wall-time", "/api/mixed"));
   }
 
   @GetMapping("/api/cpu")

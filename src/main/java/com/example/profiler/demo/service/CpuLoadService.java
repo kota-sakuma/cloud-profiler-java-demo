@@ -33,8 +33,13 @@ public class CpuLoadService {
     return sum;
   }
 
-  public long hashStrings(int iterations) throws NoSuchAlgorithmException {
-    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+  public long hashStrings(int iterations) {
+    MessageDigest digest;
+    try {
+      digest = MessageDigest.getInstance("SHA-256");
+    } catch (NoSuchAlgorithmException e) {
+      throw new IllegalStateException("SHA-256 algorithm not available", e);
+    }
     long checksum = 0;
     for (int i = 0; i < iterations; i++) {
       byte[] hashed = digest.digest(("payload-" + i).getBytes());

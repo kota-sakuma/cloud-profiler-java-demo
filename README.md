@@ -17,10 +17,10 @@ A small [Spring Boot](https://spring.io/projects/spring-boot) application that g
 The app listens on **8080**.
 
 | URL | Description |
-|-----|-------------|
-| http://localhost:8080/ | Service info and endpoint list |
-| http://localhost:8080/swagger-ui.html | OpenAPI UI |
-| http://localhost:8080/actuator/health | Health check |
+| ----- | ------------- |
+| <http://localhost:8080/> | Service info and endpoint list |
+| <http://localhost:8080/swagger-ui.html> | OpenAPI UI |
+| <http://localhost:8080/actuator/health> | Health check |
 
 Background load runs on a schedule (CPU every 5s, heap every 10s) so profiles have steady signal even without calling the APIs.
 
@@ -29,7 +29,7 @@ Background load runs on a schedule (CPU every 5s, heap every 10s) so profiles ha
 All load endpoints are `GET` under `/api/*`. Query parameters are clamped to safe ranges server-side.
 
 | Endpoint | Purpose | Main parameters (defaults) |
-|----------|---------|----------------------------|
+| ---------- | --------- | ---------------------------- |
 | `/api/cpu` | CPU-bound work (primes, hashing, sorting) | `iterations` (1–20, default `5`) |
 | `/api/heap` | Heap allocation and caching | `entries` (1_000–100_000, default `50000`) |
 | `/api/wall-time` | Sleep + lock contention | `delayMillis` (100–5000, default `500`), `threads` (1–16, default `4`) |
